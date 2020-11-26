@@ -106,71 +106,70 @@ function shift(str){
 }
 
 // Strings have a lot in common with Arrays
-console.log(str[1])
-console.log(str.length)
+// console.log(str[1])
+// console.log(str.length)
 
 // Transform a string to uppercase
-console.log(str.toUpperCase())
+// console.log(str.toUpperCase())
 
 // Split a string into an array of strings
-console.log(str.split(' ')) // split on space
+// console.log(str.split(' ')) // split on space
 
 // replace one string with another
-console.log(str.replace('hello', 'foo'))
+// console.log(str.replace('hello', 'foo'))
 // replace 
-console.log(str.replace(' ', '-'))
+// console.log(str.replace(' ', '-'))
 // replaceAll works in the browser not in node! 
 // console.log(str.replaceAll('l', '1'))
 
 // Strings and arrays don't have all the same methods
 // str.push('!') Error push not a function
-console.log('-----------')
+// console.log('-----------')
 
-console.log(upperFirst)
-console.log('-----------')
-console.log(upperFirst(str))
-console.log(upperFirst('abcdefg'))
+// console.log(upperFirst)
+// console.log('-----------')
+// console.log(upperFirst(str))
+// console.log(upperFirst('abcdefg'))
 
-console.log(upperFirstWord)
-console.log('-----------')
-console.log(upperFirstWord(str))
-console.log(upperFirstWord('abcdefg'))
+// console.log(upperFirstWord)
+// console.log('-----------')
+// console.log(upperFirstWord(str))
+// console.log(upperFirstWord('abcdefg'))
 
-console.log(upperEveryOther)
-console.log('-----------')
-console.log(upperEveryOther(str))
-console.log(upperEveryOther('abcdefg'))
+// console.log(upperEveryOther)
+// console.log('-----------')
+// console.log(upperEveryOther(str))
+// console.log(upperEveryOther('abcdefg'))
 
-console.log(removeSpace)
-console.log('-----------')
-console.log(removeSpace(str))
-console.log(removeSpace('a b c d e f g'))
+// console.log(removeSpace)
+// console.log('-----------')
+// console.log(removeSpace(str))
+// console.log(removeSpace('a b c d e f g'))
 
-console.log(removeExtraSpace)
-console.log('-----------')
-console.log(removeExtraSpace(str))
-console.log(removeExtraSpace('a   b  c  d  e f      g'))
+// console.log(removeExtraSpace)
+// console.log('-----------')
+// console.log(removeExtraSpace(str))
+// console.log(removeExtraSpace('a   b  c  d  e f      g'))
 
-console.log(kabobCase)
-console.log('-----------')
-console.log(kabobCase(str))
-console.log(kabobCase('a   b  c  d  e f      g'))
+// console.log(kabobCase)
+// console.log('-----------')
+// console.log(kabobCase(str))
+// console.log(kabobCase('a   b  c  d  e f      g'))
 
-console.log(snakeCase)
-console.log('-----------')
-console.log(snakeCase(str))
-console.log(snakeCase('a   b  c  d  e f      g'))
+// console.log(snakeCase)
+// console.log('-----------')
+// console.log(snakeCase(str))
+// console.log(snakeCase('a   b  c  d  e f      g'))
 
-console.log(camelCase)
-console.log('-----------')
-console.log(camelCase(str))
-console.log(camelCase('a   b  c  d  e f      g'))
+// console.log(camelCase)
+// console.log('-----------')
+// console.log(camelCase(str))
+// console.log(camelCase('a   b  c  d  e f      g'))
 
-console.log(shift)
-console.log('-----------')
-console.log(shift(str))
-console.log(shift('abcdefg'))
-
+// console.log(shift)
+// console.log('-----------')
+// console.log(shift(str))
+// console.log(shift('abcdefg'))
 
 
 String.prototype.first = function() {
@@ -178,24 +177,24 @@ String.prototype.first = function() {
 }
 
 // All strings now have a new method .first()
-console.log("[Method: String.first]")
-console.log('-----------')
-console.log(str.first())
+// console.log("[Method: String.first]")
+// console.log('-----------')
+// console.log(str.first())
 
 // Write a String.last method
 String.prototype.last = function() {
   return this[this.length - 1]
 }
 
-console.log("[Method: String.last]")
-console.log('-----------')
-console.log(str.last())
+// console.log("[Method: String.last]")
+// console.log('-----------')
+// console.log(str.last())
 
 // Write a String.AllCaps method
 String.prototype.AllCaps = function() {
   return this.toUpperCase()
 }
 
-console.log("[Method: String.AllCaps]")
-console.log('-----------')
-console.log(str.AllCaps())
+// console.log("[Method: String.AllCaps]")
+// console.log('-----------')
+// console.log(str.AllCaps())

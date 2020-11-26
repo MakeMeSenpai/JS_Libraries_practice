@@ -52,7 +52,7 @@ console.log(d.mins())  // 6
 console.log(d.secs())  // 5
 ```
 
-Stretch goal: Use a getter for each of these. Using a getter each of themethods could be accessed as a property rather than y calling the method. For example: `d.month` instead of `d.month()`.
+Stretch goal: Use a getter for each of these. Using a getter each of the methods could be accessed as a property rather than y calling the method. For example: `d.month` instead of `d.month()`.
 
 ```JS
 // Gets the current date with no params

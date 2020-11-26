@@ -53,6 +53,58 @@ function removeExtraSpace(str) {
   return new_string //.join("")
 }
 
+// Write a function that replaces spaces with -
+function kabobCase(str) {
+  str = removeExtraSpace(str)
+  let temp_str = str.split("")
+  let new_string = []
+  for (l in str) {
+    if (temp_str[l] == " "){
+      new_string.push("-")
+    } else {
+      new_string.push(temp_str[l])
+    }
+  }
+  return new_string.join("")
+}
+
+// Write a function that replaces spaces with _
+function snakeCase(str) {
+  str = removeExtraSpace(str)
+  let temp_str = str.split("")
+  let new_string = []
+  for (l in str) {
+    if (temp_str[l] == " "){
+      new_string.push("_")
+    } else {
+      new_string.push(temp_str[l])
+    }
+  }
+  return new_string.join("")
+}
+
+// Write a function that changes strings to camelCase
+function camelCase(str) {
+  str = removeExtraSpace(str)
+  let temp_str = str.split(" ")
+  let new_string = []
+  for (l in temp_str) {
+    if (l == 0) {
+      new_string.push(temp_str[l].toLowerCase())
+    } else {
+      new_string.push(upperFirst(temp_str[l]))
+    }
+  }
+  new_string = removeSpace(new_string.join(""))
+  return new_string
+}
+
+// Write a function that takes the first char and puts it at the end of the string
+function shift(str){
+  const first = str[0]
+  return str.slice(1) + first
+}
+
 // Strings have a lot in common with Arrays
 console.log(str[1])
 console.log(str.length)
@@ -98,6 +150,28 @@ console.log(removeExtraSpace)
 console.log('-----------')
 console.log(removeExtraSpace(str))
 console.log(removeExtraSpace('a   b  c  d  e f      g'))
+
+console.log(kabobCase)
+console.log('-----------')
+console.log(kabobCase(str))
+console.log(kabobCase('a   b  c  d  e f      g'))
+
+console.log(snakeCase)
+console.log('-----------')
+console.log(snakeCase(str))
+console.log(snakeCase('a   b  c  d  e f      g'))
+
+console.log(camelCase)
+console.log('-----------')
+console.log(camelCase(str))
+console.log(camelCase('a   b  c  d  e f      g'))
+
+console.log(shift)
+console.log('-----------')
+console.log(shift(str))
+console.log(shift('abcdefg'))
+
+
 
 String.prototype.first = function() {
   return this[0]

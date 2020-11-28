@@ -1,4 +1,3 @@
-const { TestScheduler } = require('jest');
 const { upperFirst, upperFirstWord, upperEveryOther, removeSpace,
     removeExtraSpace, kabobCase, snakeCase, camelCase,
     shift } = require('../index.js');

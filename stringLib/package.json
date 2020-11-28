@@ -1,10 +1,10 @@
 {
   "name": "@makemesenpai/stringlib",
-  "version": "2.2.1",
+  "version": "2.2.5",
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
+    "coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls"
   },
   "author": "MakeMeSenpai",
   "license": "ISC",

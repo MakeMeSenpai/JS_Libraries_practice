@@ -186,7 +186,7 @@ Add badges for:
 
 **Challenge 8**
 
-Use Rollup to bundle your date lib. Include both umd and esm bundles. 
+Use Rollup to bundle your date lib. Include both umd and esm bundles.  https://rollupjs.org/guide/en/
 
 **Stretch Challenge**
 

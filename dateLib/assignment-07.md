@@ -100,7 +100,7 @@ console.log(d.format('h:i:s'))       // 3:4:5
 console.log(d.format('Y-M-D h:I:S')) // 2017-January-02 3:04:05 
 ```
 
-Stretch goal - It would be goo if we could support more features here. Formatting dates is a very common task. There are a few things missing from the list above. 
+Stretch goal - It would be good if we could support more features here. Formatting dates is a very common task. There are a few things missing from the list above. 
 
 Each of the things below need a character to represent them.
 

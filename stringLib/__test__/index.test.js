@@ -1,7 +1,7 @@
 const { TestScheduler } = require('jest');
 const { upperFirst, upperFirstWord, upperEveryOther, removeSpace,
     removeExtraSpace, kabobCase, snakeCase, camelCase,
-    shift } = require('./index.js');
+    shift } = require('../index.js');
 
 const str = "hello world!"
 const beta = "abcdefg"

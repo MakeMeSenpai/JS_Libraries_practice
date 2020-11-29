@@ -222,11 +222,11 @@ console.log(d.format('H:I:S'))       // 03:04:05
 console.log(d.format('h:i:s'))       // 3:4:5
 console.log(d.format('Y-M-D h:I:S')) // 2017-January-02 3:04:05 
 
-d = new D('2025') // black ops 2
+d = new D('2025')
 console.log(d.when())
-d = new D('2018/10/25') // last break up
+d = new D('2018/10/25') 
 console.log(d.when())
-d = new D('2019/08/18') // starting make school
+d = new D('2019/08/18')
 console.log(d.when()) 
 d = new D(2019, 0, 2, 3, 4, 5)
 console.log(d.when()) // 6 months ago

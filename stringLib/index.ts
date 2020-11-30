@@ -1,33 +1,33 @@
 // A humble String
-const str = 'hello world'
+const str:string = 'hello world'
 
 // Write a function that uppercases the first character of string
-function upperFirst(str) {
-  const first = str[0].toUpperCase()
+function upperFirst(str:string) {
+  const first:string = str[0].toUpperCase()
   return first + str.slice(1)
 }
 
 // Write a function that uppercases the first letter of each word in a string
-function upperFirstWord(str) {
-  let temp_str = str.split(" ")
-  let new_string = []
-  for(i in temp_str){
-    word = upperFirst(temp_str[i])
+function upperFirstWord(str:string) {
+  let temp_str:Array<string> = str.split(" ")
+  let new_string:Array<string> = []
+  for(let i:number = 0; i in temp_str; i++) {
+    let word = upperFirst(temp_str[i])
     new_string.push(word)
   }
   return new_string.join(" ")
 }
 
 // Write a function that uppercases every other letter
-function upperEveryOther(str) {
-  let count = 1
-  let temp_str = str.split("")
-  let new_string = []
+function upperEveryOther(str:string) {
+  let count:number = 1
+  let temp_str:Array<string> = str.split("")
+  let new_string:Array<string> = []
   while (count < str.length + 1){
     if (count % 2 == 0){
       new_string.push(temp_str[count-1])
     } else {
-      let upper = temp_str[count-1].toUpperCase()
+      let upper:string = temp_str[count-1].toUpperCase()
       new_string.push(upper)
     }
     count ++
@@ -36,10 +36,10 @@ function upperEveryOther(str) {
 }
 
 // Write a function that removes all whitespace from a given string
-function removeSpace(str) {
-  let temp_str = str.split("")
-  let new_string = []
-  for (l in str) {
+function removeSpace(str:any) {
+  let temp_str:Array<string> = str.split("")
+  let new_string:Array<string> = []
+  for (let l:number = 0; l in str; l++) {
     if (temp_str[l] != " "){
       new_string.push(temp_str[l])
     }
@@ -48,17 +48,17 @@ function removeSpace(str) {
 }
 
 // Write a function that removes only the extra whitespace from a given string (example: “ a        b ” → “a b”)
-function removeExtraSpace(str) {
-  let new_string = str.replace(/\s+/g,' ').trim();
+function removeExtraSpace(str:string) {
+  let new_string:string = str.replace(/\s+/g,' ').trim();
   return new_string //.join("")
 }
 
 // Write a function that replaces spaces with -
-function kabobCase(str) {
+function kabobCase(str:any) {
   str = removeExtraSpace(str)
-  let temp_str = str.split("")
-  let new_string = []
-  for (l in str) {
+  let temp_str:Array<string> = str.split("")
+  let new_string:Array<string> = []
+  for (let l:number = 0; l in str; l++) {
     if (temp_str[l] == " "){
       new_string.push("-")
     } else {
@@ -69,11 +69,11 @@ function kabobCase(str) {
 }
 
 // Write a function that replaces spaces with _
-function snakeCase(str) {
+function snakeCase(str:any) {
   str = removeExtraSpace(str)
   let temp_str = str.split("")
   let new_string = []
-  for (l in str) {
+  for (let l:number = 0; l in str; l++) {
     if (temp_str[l] == " "){
       new_string.push("_")
     } else {
@@ -84,11 +84,11 @@ function snakeCase(str) {
 }
 
 // Write a function that changes strings to camelCase
-function camelCase(str) {
+function camelCase(str:string) {
   str = removeExtraSpace(str)
-  let temp_str = str.split(" ")
-  let new_string = []
-  for (l in temp_str) {
+  let temp_str:Array<string> = str.split(" ")
+  let new_string:any = []
+  for (let l:number = 0; l in temp_str; l++) {
     if (l == 0) {
       new_string.push(temp_str[l].toLowerCase())
     } else {
@@ -100,8 +100,8 @@ function camelCase(str) {
 }
 
 // Write a function that takes the first char and puts it at the end of the string
-function shift(str){
-  const first = str[0]
+function shift(str:string){
+  const first:string = str[0]
   return str.slice(1) + first
 }
 
@@ -171,6 +171,11 @@ function shift(str){
 // console.log(shift(str))
 // console.log(shift('abcdefg'))
 
+interface String {
+  first:any,
+  last:any,
+  allCaps:any,
+}
 
 String.prototype.first = function() {
   return this[0]
@@ -191,7 +196,7 @@ String.prototype.last = function() {
 // console.log(str.last())
 
 // Write a String.AllCaps method
-String.prototype.AllCaps = function() {
+String.prototype.allCaps = function() {
   return this.toUpperCase()
 }
 

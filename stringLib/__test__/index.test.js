@@ -1,6 +1,4 @@
-const { upperFirst, upperFirstWord, upperEveryOther, removeSpace,
-    removeExtraSpace, kabobCase, snakeCase, camelCase,
-    shift } = require('../index.js');
+import { upperFirst, upperFirstWord, upperEveryOther, removeSpace, removeExtraSpace, kabobCase, snakeCase, camelCase, shift } from '../index';
 
 const str = "hello world!"
 const beta = "abcdefg"

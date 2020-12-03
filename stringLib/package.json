@@ -1,7 +1,7 @@
 {
   "name": "@makemesenpai/stringlib",
   "version": "3.0.0",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "jest",
     "coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls"

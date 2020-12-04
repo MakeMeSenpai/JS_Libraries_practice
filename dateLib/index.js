@@ -9,6 +9,10 @@ class D {
     }
 
     get month() {
+        return this.date.getMonth() + 1
+    }
+
+    get monthOfYear() {
         const num = this.date.getMonth()
         let month = "January"
         if (num == 1) {
@@ -38,11 +42,30 @@ class D {
     }
 
     get day() {
-        return this.date.getDay()
+        return this.date.getDate()
+    }
+
+    get dayOfWeek() {
+        let getDay = this.date.getDay()
+        let weekDay = "Sunday"
+        if (getDay == 1) {
+            weekDay = "Monday";
+        } else if (getDay == 2) {
+            weekDay = "Tuesday"
+        } else if (getDay == 3) {
+            weekDay = "Wednesday"
+        } else if (getDay == 4) {
+            weekDay = "Thursday"
+        } else if (getDay == 5) {
+            weekDay = "Friday"
+        } else if (getDay == 6) {
+            weekDay = "Saturday"
+        }
+        return weekDay
     }
 
     get hours() {
-        return this.date.getHours()
+        return this.date.getHours() - 1
     }
 
     get mins() {
@@ -81,12 +104,20 @@ class D {
         return new_str
     }
 
-    when() {
+    when(...args) {
         const str = [] // `${years}, ${months}, ${days}, ${message}`
 
-        const years = Math.abs(this.year - this.current.getFullYear())
-        const months = Math.abs(this.date.getMonth() - this.current.getMonth())
-        const days = Math.abs(this.day - this.current.getDay())
+        // sets our variables
+        let years = Math.abs(this.year - this.current.getFullYear())
+        let months = Math.abs(this.date.getMonth() - this.current.getMonth())
+        let days = Math.abs(this.day - this.current.getDate())
+        if (args[0] !== undefined) {
+            const paramTime = new Date(...args)
+            years = Math.abs(this.year - paramTime.getFullYear())
+            months = Math.abs(this.date.getMonth() - paramTime.getMonth())
+            days = Math.abs(this.day - paramTime.getDate())   
+        }
+
         // if there is a difference in years
         if (years != 0) {
             // add an s or not
@@ -159,10 +190,18 @@ class D {
             }
         }
 
-        const difference = this.date.getTime() - this.current.getTime()
-        if (difference < 0) {
+        // Before, After, or Now? 
+        let check = this.date.getTime()
+        let against = this.current.getTime()
+        if (args[0] !== undefined) {
+            const paramTime = new Date(...args)
+            check = paramTime.getTime()
+            against = this.date.getTime()
+        }
+        // 86400000 a day in ms
+        if (check < against - 86400000) {
             str.push("ago")
-        } else if (difference > 0) {
+        } else if (check > against + 86400000) {
             str.push("from now")
         } else {
             str.push("today")
@@ -184,57 +223,58 @@ let d = new D()
  * This method returns the inputed year
  * @returns {number} this.date's year
  */
-console.log(d.year)  // 2019 fullYear
+// console.log(e.year)  // 2019 fullYear
 /**
  * This method returns the inputed month
  * @returns {string} this.date's month
  */
-console.log(d.month) // July 6
+//console.log(d.month) // July 6
 /**
  * This method returns the inputed day
  * @returns {number} this.date's day
  */
-console.log(d.day)   // 27
+//console.log(d.day)   // 27
 /**
  * This method returns the inputed hour
  * @returns {number} this.date's hour
  */
-console.log(d.hours) // 18
+//console.log(d.hours) // 18
 /**
  * This method returns the inputed minutes
  * @returns {number} this.date's minutes
  */
-console.log(d.mins)  // 6
+//console.log(d.mins)  // 6
 /**
  * This method returns the inputed seconds
  * @returns {number} this.date's seconds
  */
-console.log(d.secs)  // 5
+//console.log(d.secs)  // 5
 
 /**
- * This class adds one to its input.
- * @param {number} input any number
- * @returns {number} that number, plus one.
+ * This method adds one to its input.
+ * @param {string} optional of y(year) m(month) d(date)
+ *  h(hours) i(minutes) s(seconds) and any seperator
+ * @returns {string} that number, plus one.
  */
-console.log(d.format())              // 2017 January 02
-console.log(d.format('y/m/d'))       // 17/Jan/2
-console.log(d.format('H:I:S'))       // 03:04:05
-console.log(d.format('h:i:s'))       // 3:4:5
-console.log(d.format('Y-M-D h:I:S')) // 2017-January-02 3:04:05 
+//console.log(d.format())              // 2017 January 02
+//console.log(d.format('y/m/d'))       // 17/Jan/2
+//console.log(d.format('H:I:S'))       // 03:04:05
+//console.log(d.format('h:i:s'))       // 3:4:5
+//console.log(d.format('Y-M-D h:I:S')) // 2017-January-02 3:04:05 
+/**
+ * This method returns when class time is from today
+ * If this method recieves a string input it will 
+ *   compare class time with param time
+ * @param {...args} optional 
+ * @return {string} of either
+ * how far class time is from current time  
+ * how far param time is from class time
+ */
+// d = new D('2025') // from now
+// console.log(d.when())
+// d = new D('2018/10/25') 
+// console.log(d.when()) // ago
+// d = new D()
+// console.log(d.when()) // today
 
-d = new D('2025')
-console.log(d.when())
-d = new D('2018/10/25') 
-console.log(d.when())
-d = new D('2019/08/18')
-console.log(d.when()) 
-d = new D(2019, 0, 2, 3, 4, 5)
-console.log(d.when()) // 6 months ago
-d = new D(2019, 9, 2, 3, 4, 5)
-console.log(d.when()) // 3 months from now
-d = new D(2024, 9, 2, 3, 4, 5)
-console.log(d.when()) // 5 years from now
-d = new D(2019, 6, 30, 3, 4, 5)
-console.log(d.when()) // 3 days from now
-d = new D()
-console.log(d.when()) // today
+module.exports.D = D

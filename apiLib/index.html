@@ -74,38 +74,6 @@
       </form>
     </div>
 
-    <script>
-      // ------------------------------------------------------
-      // Developer Code
-
-      // Get Element refererences
-      const tempEl = document.getElementById('temp')
-      const descEl = document.getElementById('desc')
-      const formEl = document.getElementById('form')
-      const zipInput = document.getElementById('zip')
-
-      // Define event listeners
-      formEl.addEventListener('submit', (e) => {
-        e.preventDefault()
-        const zip = zipInput.value
-        getWeather(zip).then((json) => {
-            temp.innerHTML = json.main.temp
-            desc.innerHTML = json.weather[0].description
-        })
-        .catch((error) => {console.log(error)})
-      })
-
-      // Functions 
-    function getWeather(zip) {
-        const apiKey = '467355df4c808dd6134a3b64e9ace282'
-        const units = 'imperial'
-        const path = `https://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=${apiKey}&units=${units}`
-        const p = fetch(path) // returns a promise
-        const json = p.then(res => res.json())
-        
-        return json
-      }
-           
-    </script>
+    <script src="index.js"></script>
   </body>
 </html>

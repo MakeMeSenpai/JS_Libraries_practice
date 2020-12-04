@@ -1,4 +1,5 @@
-// ------------------------------------------------------
+// to run $tsc index.ts
+// to create js file $npx tsc src/index.ts
 // Developer Code
 require('../dotenv').config();
 

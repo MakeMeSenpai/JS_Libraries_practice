@@ -1,3 +1,5 @@
+// to run $tsc index.ts
+// to create js file $npx tsc src/index.ts 
 // A humble String
 const str:string = 'hello world'
 

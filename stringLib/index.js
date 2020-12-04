@@ -2,6 +2,7 @@
 var str = 'hello world';
 // Write a function that uppercases the first character of string
 function upperFirst(str) {
+    console.log(str)
     var first = str[0].toUpperCase();
     return first + str.slice(1);
 }
@@ -9,8 +10,13 @@ function upperFirst(str) {
 function upperFirstWord(str) {
     var temp_str = str.split(" ");
     var new_string = [];
-    for (var i = 0; i in temp_str; i++) {
-        var word = upperFirst(temp_str[i]);
+    var word = ""
+    for (i in temp_str) {
+        if (temp_str[i] != " "){
+            word = upperFirst(temp_str[i]);
+        } else {
+            word = " "
+        }
         new_string.push(word);
     }
     return new_string.join(" ");
@@ -36,7 +42,7 @@ function upperEveryOther(str) {
 function removeSpace(str) {
     var temp_str = str.split("");
     var new_string = [];
-    for (var l = 0; l in str; l++) {
+    for (l in str) {
         if (temp_str[l] != " ") {
             new_string.push(temp_str[l]);
         }
@@ -53,7 +59,7 @@ function kabobCase(str) {
     str = removeExtraSpace(str);
     var temp_str = str.split("");
     var new_string = [];
-    for (var l = 0; l in str; l++) {
+    for (l in str) {
         if (temp_str[l] == " ") {
             new_string.push("-");
         }
@@ -68,7 +74,7 @@ function snakeCase(str) {
     str = removeExtraSpace(str);
     var temp_str = str.split("");
     var new_string = [];
-    for (var l = 0; l in str; l++) {
+    for (l in str) {
         if (temp_str[l] == " ") {
             new_string.push("_");
         }
@@ -83,7 +89,7 @@ function camelCase(str) {
     str = removeExtraSpace(str);
     var temp_str = str.split(" ");
     var new_string = [];
-    for (var l = 0; l in temp_str; l++) {
+    for (l in temp_str) {
         if (l == 0) {
             new_string.push(temp_str[l].toLowerCase());
         }
@@ -120,3 +126,13 @@ String.prototype.allCaps = function () {
 // console.log("[Method: String.AllCaps]")
 // console.log('-----------')
 // console.log(str.AllCaps())
+
+module.exports.upperFirst = upperFirst
+module.exports.upperFirstWord = upperFirstWord
+module.exports.upperEveryOther = upperEveryOther
+module.exports.removeSpace = removeSpace
+module.exports.removeExtraSpace = removeExtraSpace
+module.exports.kabobCase = kabobCase
+module.exports.snakeCase = snakeCase
+module.exports.camelCase = camelCase
+module.exports.shift = shift

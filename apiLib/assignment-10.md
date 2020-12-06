@@ -10,9 +10,9 @@ Expect to present your work on the job. It might be problems you have been taske
 
 ## Project requirements
 
-You need to show your API library in class. It should be presentanted in three ways: 
+You need to show your API library in class. It should be presentable in three ways: 
 
-- What is it? This ia quick "lightning talk" on what you have made. 
+- What is it? This is quick "lightning talk" on what you have made. 
   - What does it do?
   - Who would use this? 
   - What problems does it solve? 
@@ -24,7 +24,7 @@ You need to show your API library in class. It should be presentanted in three w
 
 ### Deliverable
 
-You in class prepared. 
+You're in class prepared. 
 
 ### Due date
 
@@ -32,4 +32,4 @@ Class 14 - Tue, Dec 10
 
 ## Assessing the assignment
 
-[Assignmen 10 Rubric](./assignment-10-rubric.md)
+[Assignment 10 Rubric](./assignment-10-rubric.md)

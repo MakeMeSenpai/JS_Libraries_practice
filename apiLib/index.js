@@ -78,7 +78,7 @@ var Weather = /** @class */ (function () {
                                 temp: json.main.temp,
                                 desc: json.weather[0].description,
                                 feelsLike: json.main.feels_like,
-                                icon: json.weather[0].icon,
+                                icon: "http://openweathermap.org/img/w/" + json.weather[0].icon + ".png",
                                 max: json.main.temp_max,
                                 min: json.main.temp_min,
                                 // windDisplay: json.wind.speed, + json.wind.deg, // figure out how degrees relate to N-E-S-W
@@ -121,51 +121,22 @@ if (typeof document !== 'undefined') {
         e.preventDefault();
         // creates a new instance of weather
         var w = new Weather('c9f2384035495137f5ce5715af3bb404');
-        //collects necessary elements from API
-        var temp = "";
-        var desc = "";
-        var feelsLike = "";
-        var icon = "";
-        var max = "";
-        var min = "";
-        // var windDisplay:string = ""
-        var humidity = "";
-        var visibility = "";
-        // var sunrise:string = ""
-        // var sunset:string = ""
-        var city = "";
-        var country = "";
-        var coords = "";
+        //collects necessary elements from API and edits Dom
         w.callZip(zip.value).then(function (json) {
-            temp = json.temp;
-            desc = json.desc;
-            feelsLike = json.feelsLike;
-            icon = json.icon;
-            max = json.max;
-            min = json.min;
-            // windDisplay = json.windDisplay
-            humidity = json.humidity;
-            visibility = json.visibility;
-            // sunrise = json.sunrise
-            // sunset = json.sunset
-            city = json.city;
-            country = json.country;
-            coords = json.coords;
+            tempDisplay_1.innerHTML = json.temp;
+            descDisplay_1.innerHTML = json.desc;
+            feelsDisplay_1.innerHTML = json.feelsLike;
+            iconDisplay_1.innerHTML = "<img src=" + json.icon + ">";
+            maxDisplay_1.innerHTML = json.max;
+            minDisplay_1.innerHTML = json.min;
+            // windsDisplay.innerHTML = json.windDisplay
+            humidDisplay_1.innerHTML = json.humidity;
+            visualDisplay_1.innerHTML = json.visibility;
+            // riseDisplay.innerHTML = json.sunrise
+            // setDisplay.innerHTML = json.sunset
+            cityDisplay_1.innerHTML = json.city;
+            countryDisplay_1.innerHTML = json.country;
+            coordDisplay_1.innerHTML = json.coords;
         })["catch"](function (error) { console.log("In method temp(line 34): " + error); });
-        // Edits Dom
-        tempDisplay_1.innerHTML = temp;
-        descDisplay_1.innerHTML = desc;
-        feelsDisplay_1.innerHTML = feelsLike;
-        iconDisplay_1.innerHTML = icon;
-        maxDisplay_1.innerHTML = max;
-        minDisplay_1.innerHTML = min;
-        // windsDisplay.innerHTML = windDisplay
-        humidDisplay_1.innerHTML = humidity;
-        visualDisplay_1.innerHTML = visibility;
-        // riseDisplay.innerHTML = sunrise
-        // setDisplay.innerHTML = sunset
-        cityDisplay_1.innerHTML = city;
-        countryDisplay_1.innerHTML = country;
-        coordDisplay_1.innerHTML = coords;
     });
 }

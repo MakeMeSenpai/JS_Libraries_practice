@@ -36,7 +36,7 @@ class Weather {
             temp: json.main.temp,
             desc: json.weather[0].description,
             feelsLike: json.main.feels_like,
-            icon: json.weather[0].icon, // how to display api icon?
+            icon: "http://openweathermap.org/img/w/" + json.weather[0].icon + ".png",
             max: json.main.temp_max,
             min: json.main.temp_min,
             // windDisplay: json.wind.speed, + json.wind.deg, // figure out how degrees relate to N-E-S-W
@@ -78,51 +78,22 @@ if (typeof document !== 'undefined') {
         e.preventDefault()
         // creates a new instance of weather
         const w = new Weather('c9f2384035495137f5ce5715af3bb404')
-        //collects necessary elements from API
-        var temp:string = ""
-        var desc:string = ""
-        var feelsLike:string = ""
-        var icon:string = ""
-        var max:string = ""
-        var min:string = ""
-        // var windDisplay:string = ""
-        var humidity:string = ""
-        var visibility:string = ""
-        // var sunrise:string = ""
-        // var sunset:string = ""
-        var city:string = ""
-        var country:string = ""
-        var coords:string = ""
+        //collects necessary elements from API and edits Dom
         w.callZip(zip.value).then((json) => {
-            temp = json.temp;
-            desc = json.desc;
-            feelsLike = json.feelsLike;
-            icon = json.icon;
-            max = json.max;
-            min = json.min;
-            // windDisplay = json.windDisplay
-            humidity = json.humidity;
-            visibility = json.visibility;
-            // sunrise = json.sunrise
-            // sunset = json.sunset
-            city = json.city;
-            country = json.country;
-            coords = json.coords;
+            tempDisplay.innerHTML = json.temp;
+            descDisplay.innerHTML = json.desc;
+            feelsDisplay.innerHTML = json.feelsLike;
+            iconDisplay.innerHTML = `<img src=${json.icon}>`;
+            maxDisplay.innerHTML = json.max;
+            minDisplay.innerHTML = json.min;
+            // windsDisplay.innerHTML = json.windDisplay
+            humidDisplay.innerHTML = json.humidity;
+            visualDisplay.innerHTML = json.visibility;
+            // riseDisplay.innerHTML = json.sunrise
+            // setDisplay.innerHTML = json.sunset
+            cityDisplay.innerHTML = json.city;
+            countryDisplay.innerHTML = json.country;
+            coordDisplay.innerHTML = json.coords;
         }).catch((error) => {console.log(`In method temp(line 34): ${error}`)})
-        // Edits Dom
-        tempDisplay.innerHTML = temp
-        descDisplay.innerHTML = desc
-        feelsDisplay.innerHTML = feelsLike
-        iconDisplay.innerHTML = icon
-        maxDisplay.innerHTML = max
-        minDisplay.innerHTML = min
-        // windsDisplay.innerHTML = windDisplay
-        humidDisplay.innerHTML = humidity
-        visualDisplay.innerHTML = visibility
-        // riseDisplay.innerHTML = sunrise
-        // setDisplay.innerHTML = sunset
-        cityDisplay.innerHTML = city
-        countryDisplay.innerHTML = country
-        coordDisplay.innerHTML = coords
     })
 }

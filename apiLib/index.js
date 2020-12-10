@@ -1,210 +1,100 @@
+// to run $tsc index.ts
+// to create js file $npx tsc src/index.ts
+// Developer Code
+// declare function require(name:string): any;
+// require('dotenv').config();
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
 /**
  * @class weather holds our main functionality
  * @param zip takes type string of zip code
  */
-var weather = /** @class */ (function () {
-    function weather(zip) {
-        this.zip = zip;
-        this.path = `https://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=c9f2384035495137f5ce5715af3bb404&units=imperial`;
-        console.log(`zipperoini ${this.path}`)
+var Unit;
+(function (Unit) {
+    Unit["imperial"] = "imperial";
+    Unit["metric"] = "metric";
+})(Unit || (Unit = {}));
+var Weather = /** @class */ (function () {
+    function Weather(apiKey, unit) {
+        if (unit === void 0) { unit = Unit.imperial; }
+        // const apiKey:string = process.env.APIKEY
+        this.apiKey = apiKey;
+        this.unit = unit;
     }
     /**
-     * @method promise() creates promise
-     * @return json format
+     * Make a new instance of class const myWeather = new Weather(myAPIKey, Unit:optional)
+     * myWeather.callZip(myZip).then((json) => {
+     *      json.temp
+     * }).catch((error) => {console.log(`In method temp(line 34): ${error}`)})
      */
-    weather.prototype.promise = function () {
-        var p = fetch(this.path);
-        var json = p.then(function (res) { return res.json(); });
-        return json;
+    Weather.prototype.callZip = function (zip) {
+        return __awaiter(this, void 0, void 0, function () {
+            var path, res, json;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        path = "https://api.openweathermap.org/data/2.5/weather?zip=" + zip + "&appid=" + this.apiKey + "&units=" + this.unit;
+                        return [4 /*yield*/, fetch(path)];
+                    case 1:
+                        res = _a.sent();
+                        return [4 /*yield*/, res.json()];
+                    case 2:
+                        json = _a.sent();
+                        return [2 /*return*/, {
+                                temp: json.main.temp,
+                                desc: json.weather[0].description,
+                                feelsLike: json.main.feels_like,
+                                icon: json.weather[0].icon,
+                                max: json.main.temp_max,
+                                min: json.main.temp_min,
+                                // windDisplay: json.wind.speed, + json.wind.deg, // figure out how degrees relate to N-E-S-W
+                                humidity: json.main.humidity,
+                                visibility: json.visibility,
+                                // sunrise: json.sys.sunrise, // return new Date(sunrise * 1000)
+                                // sunset: json.sys.sunset, 
+                                city: json.name,
+                                country: json.sys.country,
+                                coords: "Lon: " + json.coord.lon + ", Lat: " + json.coord.lat
+                            }];
+                }
+            });
+        });
     };
-    Object.defineProperty(weather.prototype, "temp", {
-        /**
-         * @method temp gives us the temperature
-         * @return string api message, or console logs catching error
-         */
-        get: function () {
-            return this.promise().then(function (json) {
-                return json.main.temp;
-            })["catch"](function (error) { console.log("In method temp(line 34): " + error); });
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(weather.prototype, "desc", {
-        /**
-         * @method desc gives us the description
-         * @return string api message, or console logs catching error
-         */
-        get: function () {
-            return this.promise().then(function (json) {
-                return json.weather[0].description;
-            })["catch"](function (error) { console.log("In method desc(line 44): " + error); });
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(weather.prototype, "feelsLike", {
-        /**
-         * @method feelsLike gives us what temperature it feels like
-         * @return string api message, or console logs catching error
-         */
-        get: function () {
-            return this.promise().then(function (json) {
-                return json.main.feels_like;
-            })["catch"](function (error) { console.log("In method feelsLike(line 54): " + error); });
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(weather.prototype, "max", {
-        /**
-         * @abstract idea
-         * @method icon gives us a weather icon
-         * @return string api message, or console logs catching error
-         */
-        // get icon():any {
-        //     return this.promise().then((json) => {
-        //         return json.weather[0].icon // how to display api icon?
-        //     }).catch((error) => {console.log(`In method icon(line 48): ${error}`)})
-        // }
-        /**
-         * @method max gives us today's highest temperature
-         * @return string api message, or console logs catching error
-         */
-        get: function () {
-            return this.promise().then(function (json) {
-                return json.main.temp_max;
-            })["catch"](function (error) { console.log("In method max(line 74): " + error); });
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(weather.prototype, "min", {
-        /**
-         * @method min gives us today's lowest temperature
-         * @return string api message, or console logs catching error
-         */
-        get: function () {
-            return this.promise().then(function (json) {
-                return json.main.temp_min;
-            })["catch"](function (error) { console.log("In method min(line 84): " + error); });
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(weather.prototype, "humidity", {
-        /**
-         * @abstract idea
-         * @method winds gives us the wind speeds and direction of wind
-         * @return string api message, or console logs catching error
-         */
-        // get winds():any {
-        //    return this.promise().then((json) => {
-        //         return json.wind.speed
-        //         return json.wind.deg // figure out how degrees relate to N-E-S-W
-        //     }).catch((error) => {console.log(`In method winds(line 30): ${error}`)})
-        // }
-        /**
-         * @method humidity gives us humidity levels
-         * @return string api message, or console logs catching error
-         */
-        get: function () {
-            return this.promise().then(function (json) {
-                return json.main.humidity;
-            })["catch"](function (error) { console.log("In method humidity(line 105): " + error); });
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(weather.prototype, "visibility", {
-        /**
-         * @method visibility gives us todays clarity
-         * @return string api message, or console logs catching error
-         */
-        get: function () {
-            return this.promise().then(function (json) {
-                return json.visibility;
-            })["catch"](function (error) { console.log("In method visibility(line 115): " + error); });
-        },
-        enumerable: false,
-        configurable: true
-    });
-    /**
-     * @abstract idea
-     * @method sunrise gives us the time of today's sunrise
-     * @return string api message, or console logs catching error
-     */
-    // get sunrise():any {
-    //     return this.promise().then((json) => {
-    //         return json.sys.sunrise // return new Date(sunrise * 1000)
-    //     }).catch((error) => {console.log(`In method temp(line ?): ${error}`)})
-    // }
-    /**
-     * @abstract idea
-     * @method sunset gives us the time of today's sunset
-     * @return string api message, or console logs catching error
-     */
-    // get sunset():any {
-    //     return this.promise().then((json) => {
-    //         return json.sys.sunset
-    //     }).catch((error) => {console.log(`In method temp(line ?): ${error}`)})
-    // }
-    /**
-     * @method givenZip() gives us the objects zip code
-     * @return string api message, or console logs catching error
-     */
-    weather.prototype.givenZip = function () {
-        var _this = this;
-        return this.promise().then(function (json) {
-            return _this.zip;
-        })["catch"](function (error) { console.log("In method temp(line 149): " + error); });
-    };
-    Object.defineProperty(weather.prototype, "city", {
-        /**
-         * @abstract idea
-         * @method changeZip() changes the objects zip
-         * @param newZip @type string
-         * currentZip = newZip 92103 = 30219 -> 30219
-         * @return string api message, or console logs catching error
-         */
-        // changeZip(newZip:string):none {
-        // changes current zip code to newZip code
-        // }
-        /**
-         * @abstract idea
-         * @method revertZip() reverts to last saved zip
-         * currentZip = lastZip 30219 = 92103 -> 92103
-         * @return string api message, or console logs catching error
-         */
-        // revertZip():none {
-        // undo changed zip code to last saved
-        // }
-        /**
-         * @method city gives us object's city
-         * @return string api message, or console logs catching error
-         */
-        get: function () {
-            return this.promise().then(function (json) {
-                return json.name;
-            })["catch"](function (error) { console.log("In method temp(line 180): " + error); });
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(weather.prototype, "country", {
-        /**
-         * @method country gives us object's country
-         * @return string api message, or console logs catching error
-         */
-        get: function () {
-            return this.promise().then(function (json) {
-                return json.sys.country;
-            })["catch"](function (error) { console.log("In method temp(line ): " + error); });
-        },
-        enumerable: false,
-        configurable: true
-    });
-    return weather;
+    return Weather;
 }());
 /* EXAMPLE */
 if (typeof document !== 'undefined') {
@@ -213,7 +103,7 @@ if (typeof document !== 'undefined') {
     var tempDisplay_1 = document.getElementById('temp');
     var descDisplay_1 = document.getElementById('desc');
     var feelsDisplay_1 = document.getElementById('feels');
-    // const iconDisplay = document.getElementById('icon')
+    var iconDisplay_1 = document.getElementById('icon');
     var maxDisplay_1 = document.getElementById('max');
     var minDisplay_1 = document.getElementById('min');
     // const windsDisplay = document.getElementById('winds')
@@ -221,35 +111,61 @@ if (typeof document !== 'undefined') {
     var visualDisplay_1 = document.getElementById('visual');
     // const riseDisplay = document.getElementById('rise')
     // const setDisplay = document.getElementById('set')
-    var ourZip_1 = document.getElementById('our');
-    // const newZip = document.getElementById('new')
-    // const oldZip = document.getElementById('old')
     var cityDisplay_1 = document.getElementById('city');
     var countryDisplay_1 = document.getElementById('country');
-    // const coordDisplay = document.getElementById('coord')
+    var coordDisplay_1 = document.getElementById('coord');
     // listens for whatever zip user inputs
     var zip = document.getElementById('zip');
-    // Define event listeners and Edits DOM
+    // Define event listener
     form.addEventListener('submit', function (e) {
         e.preventDefault();
         // creates a new instance of weather
-        var w_1 = new weather(zip.value);
-        tempDisplay_1.innerHTML = w_1.temp;
-        descDisplay_1.innerHTML = w_1.desc;
-        feelsDisplay_1.innerHTML = w_1.feelsLike;
-        // iconDisplay.innerHTML = w.icon
-        maxDisplay_1.innerHTML = w_1.max;
-        minDisplay_1.innerHTML = w_1.min;
-        // windsDisplay.innerHTML = w.winds
-        humidDisplay_1.innerHTML = w_1.humidity;
-        visualDisplay_1.innerHTML = w_1.visibility;
-        // riseDisplay.innerHTML = w.sunrise
-        // setDisplay.innerHTML = w.sunset
-        ourZip_1.innerHTML = w_1.givenZip();
-        // newZip.innerHTML = w.changeZip(94108)
-        // oldZip.innerHTML = w.revertZip()
-        cityDisplay_1.innerHTML = w_1.city;
-        countryDisplay_1.innerHTML = w_1.country;
-        // coordDisplay.innerHTML = w.coordinates
+        var w = new Weather('c9f2384035495137f5ce5715af3bb404');
+        //collects necessary elements from API
+        var temp = "";
+        var desc = "";
+        var feelsLike = "";
+        var icon = "";
+        var max = "";
+        var min = "";
+        // var windDisplay:string = ""
+        var humidity = "";
+        var visibility = "";
+        // var sunrise:string = ""
+        // var sunset:string = ""
+        var city = "";
+        var country = "";
+        var coords = "";
+        w.callZip(zip.value).then(function (json) {
+            temp = json.temp;
+            desc = json.desc;
+            feelsLike = json.feelsLike;
+            icon = json.icon;
+            max = json.max;
+            min = json.min;
+            // windDisplay = json.windDisplay
+            humidity = json.humidity;
+            visibility = json.visibility;
+            // sunrise = json.sunrise
+            // sunset = json.sunset
+            city = json.city;
+            country = json.country;
+            coords = json.coords;
+        })["catch"](function (error) { console.log("In method temp(line 34): " + error); });
+        // Edits Dom
+        tempDisplay_1.innerHTML = temp;
+        descDisplay_1.innerHTML = desc;
+        feelsDisplay_1.innerHTML = feelsLike;
+        iconDisplay_1.innerHTML = icon;
+        maxDisplay_1.innerHTML = max;
+        minDisplay_1.innerHTML = min;
+        // windsDisplay.innerHTML = windDisplay
+        humidDisplay_1.innerHTML = humidity;
+        visualDisplay_1.innerHTML = visibility;
+        // riseDisplay.innerHTML = sunrise
+        // setDisplay.innerHTML = sunset
+        cityDisplay_1.innerHTML = city;
+        countryDisplay_1.innerHTML = country;
+        coordDisplay_1.innerHTML = coords;
     });
 }
